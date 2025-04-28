@@ -30,7 +30,7 @@ python main.py
 ## Project Structure
 
 ```
-Gravity/
+UniverseExplorer/
 ├── effects/
 │   ├── particle_system.py
 ├── models/
