@@ -25,13 +25,14 @@ python main.py
 ## Controls
 
 - Click on galaxies to explore their solar systems
-- Click the back button to return to galaxy view
-- Hover over planets to see their information
+- Click right click to return to galaxy view
 
 ## Project Structure
 
 ```
 Gravity/
+├── effects/
+│   ├── particle_system.py
 ├── models/
 │   ├── __init__.py
 │   ├── galaxy.py
