@@ -101,12 +101,29 @@ class Galaxy:
 
     def draw(self, screen):
         if self.state == GALAXY_VIEW:
-            # Draw simplified galaxies
+            # Draw enhanced galaxies
             for star in self.stars:
                 pos = (int(star.body.position.x), int(star.body.position.y))
-                # Draw galaxy representation
-                pygame.draw.circle(screen, (100, 100, 200), pos, 30)
-                pygame.draw.circle(screen, (150, 150, 255), pos, 15)
+                
+                # Draw outer glow
+                for radius in range(45, 30, -5):
+                    alpha_surface = pygame.Surface((radius * 2, radius * 2), pygame.SRCALPHA)
+                    alpha = max(0, int(255 * (1 - radius/45)))  # Fade out effect
+                    pygame.draw.circle(alpha_surface, (100, 100, 200, alpha), (radius, radius), radius)
+                    screen.blit(alpha_surface, (pos[0] - radius, pos[1] - radius))
+                
+                # Draw core and spiral arms
+                pygame.draw.circle(screen, (150, 150, 255), pos, 20)  # Brighter core
+                pygame.draw.circle(screen, (200, 200, 255), pos, 10)  # Central bright spot
+                
+                # Draw spiral arms
+                for i in range(2):  # Two spiral arms
+                    angle = i * math.pi
+                    for t in range(0, 20, 2):
+                        spiral_x = pos[0] + math.cos(angle + t/5) * t
+                        spiral_y = pos[1] + math.sin(angle + t/5) * t
+                        size = max(1, 3 - t/7)
+                        pygame.draw.circle(screen, (150, 150, 255), (int(spiral_x), int(spiral_y)), int(size))
         else:
             # Draw solar system
             for star in self.stars:
