@@ -1,0 +1,6 @@
+{
+    "fps": 60,
+    "num_stars": 5,
+    "planet_speed": 0.3,
+    "debug": false
+}
